@@ -7,8 +7,10 @@ const PORT = process.env.PORT || 5000 //process.env checks for environmental pro
 connectDB()
 
 //defining restApi and middlewares
+app.use(express.json({extends:false}))
 app.use("/api/users",require("./routes/userApi"))
 app.use("/api/products",require("./routes/productsApi"))
+app.use("/api/auth",require("./routes/authApi"))
 
 app.get("/",(req,res)=>{
     res.send("My App Begins")
