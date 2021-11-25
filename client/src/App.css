@@ -33,18 +33,29 @@
 body {
     font-family: "Raleway", sans-serif;
     font-size: 1rem;
-    line-height: 1.6;
+    line-height: 2.6;
     background-color: #fff;
     color: #333;
 }
 
 a {
-    color: var(--primary-color);
+    color: var(--light-color);
     text-decoration: none;
 }
 
 ul {
     list-style: none;
+    display: flex;
+}
+
+.nav-h1{
+    margin-left: 3.5rem
+}
+
+.nav-li{
+    margin-right: 2rem;
+    display: flex;
+    align-items: center;
 }
 
 img {
@@ -66,6 +77,7 @@ img {
     font-size: 4rem;
     line-height: 1.2;
     margin-bottom: 1rem;
+    color: #28a745;
 }
 
 .large {
@@ -198,6 +210,9 @@ img {
 .bg-main {
     background: var(--main-color);
     color: #fff;
+    display: flex;
+    justify-content: space-between;
+    height: 4rem;
 }
 
 .btn-light,
@@ -365,7 +380,7 @@ button {
 .landing {
     margin-top: 6.3%;
     position: relative;
-    background: url("/assets/images/eshop.jpg") no-repeat center center/cover;
+    /* background: url("/assets/images/eshop.jpg") no-repeat center center/cover; */
     height: 60vh;
 }
 

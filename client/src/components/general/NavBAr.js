@@ -2,23 +2,23 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import "../../App.css"
 
-NavBAr = () => {
+const NavBAr = () => {
     return (
         <nav className='navbar bg-main'>
-            <h1>
+            <h1 className='nav-h1'>
                 <Link to="">
-                    <i className='fas fa-store'></i>E-Cart
+                    <i className='fas fa-store'></i> E-Cart
                 </Link>
             </h1>
             <ul>
-                <li>
+                <li className='nav-li'>
                     <Link to="">Merchants</Link>
                 </li>
-                <li>
-                    <Link to="">Register</Link>
+                <li className='nav-li'>
+                    <Link to="/register">Register</Link>
                 </li>
-                <li>
-                    <Link to="">Login</Link>
+                <li className='nav-li'>
+                    <Link to="/login">Login</Link>
                 </li>
             </ul>
         </nav>

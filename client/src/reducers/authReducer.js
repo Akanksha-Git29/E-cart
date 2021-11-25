@@ -8,7 +8,7 @@ import {
 import {isEmpty} from 'lodash'
 
 const initialState = {
-    isAuthenticated = false,
+    isAuthenticated : false,
     token : localStorage.getItem("token"),
     user: {},
     errors: []
