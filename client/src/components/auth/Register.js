@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Input from '../general/Input'
+import { message } from 'antd'
 import { register } from '../../actions/authAction'
 import { useNavigate } from 'react-router-dom'
 export const withRouter = (Component) => { //works only for react6
@@ -28,9 +29,44 @@ class Register extends Component {
             password: "",
             password2: "",
         }
+
+        this.onChange = this.onChange.bind(this)
+        this.OnSubmit = this.OnSubmit.bind(this)
     }
+
+    componentWillReceiveProps(nextProps){
+        console.log(nextProps)
+        if(nextProps && nextProps.auth.errors && nextProps.auth.errors.length > 0){
+            nextProps.auth.errors.forEach(error => {
+                message.error(error.msg)
+            })
+        }
+
+        if(nextProps.auth.isAuthenticated){
+            message.success("Thankyou for sigining up")
+            setTimeout(()=> this.props.history.push("/"),3000)
+        }
+    }
+
     onChange(e) {
-        console.log(e)
+        // console.log(e.target.name)
+        this.setState({[e.target.name] : e.target.value})
+    }
+
+    OnSubmit(){
+        const {name,email,password} = this.state
+        const newUser = {
+            name,
+            email,
+            password
+        }
+
+        if(password === this.state.password2){
+            this.props.register(newUser)
+        }
+        else{
+            console.log("password doesn't match")
+        }
     }
 
     render() {
@@ -46,7 +82,7 @@ class Register extends Component {
                         name='name'
                         type='text'
                         placeholder='Enter Name'
-                        value='name'
+                        value={name}
                         onChange={this.onChange}
                     />
                 </div>
@@ -55,7 +91,7 @@ class Register extends Component {
                         name='email'
                         type='email'
                         placeholder='Enter Email'
-                        value='email'
+                        value={email}
                         onChange={this.onChange}
                     />
                 </div>
@@ -77,7 +113,7 @@ class Register extends Component {
                         onChange={this.onChange}
                     />
                 </div>
-                <button className="btn btn-primary">Click to Register</button>
+                <button className="btn btn-primary" onClick={this.OnSubmit} >Click to Register</button>
             </div>
         )
     }

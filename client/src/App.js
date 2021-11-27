@@ -13,6 +13,7 @@ import Background from './components/landing/Background';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import "./App.css"
+import 'antd/dist/antd.css'
 
 function App() {
   return (
