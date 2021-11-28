@@ -3,7 +3,9 @@ import {
     SUCCESSFUL_REGISTER, 
     FAILURE_REGISTER,
     ERRORS,
-    AUTH_ERROR
+    AUTH_ERROR,
+    SUCCESSFUL_LOGIN,
+    FAILURE_LOGIN
 } from '../actions/types'
 import {isEmpty} from 'lodash'
 
@@ -24,6 +26,7 @@ export default function(state = initialState, action){
                 user: payload
             }
         case SUCCESSFUL_REGISTER:
+        case SUCCESSFUL_LOGIN:
             localStorage.setItem("token",payload.token)
             return{
                 ...state,
@@ -32,6 +35,7 @@ export default function(state = initialState, action){
             }
         case FAILURE_REGISTER:
         case AUTH_ERROR:
+        case FAILURE_LOGIN:
             localStorage.removeItem('token')
             return{
                 ...state,

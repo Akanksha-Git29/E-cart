@@ -3,14 +3,18 @@ import { connect } from 'react-redux'
 import Input from '../general/Input'
 import { message } from 'antd'
 import { register } from '../../actions/authAction'
-import { useNavigate } from 'react-router-dom'
-export const withRouter = (Component) => { //works only for react6
+import { useNavigate, useLocation ,} from 'react-router-dom'
+
+export const withRouter = (Component) => { //works only for react16-17 //hooks
     const Wrapper = (props) => { 
         const history = useNavigate(); //userNavigator ~ useHistory ~withRoutes
+        const location = useLocation(); //to get child from a nested props
 
         return (
             <Component
                 history={history}
+                {...props}
+                location={location}
                 {...props}
             />
         );
@@ -35,7 +39,7 @@ class Register extends Component {
     }
 
     componentWillReceiveProps(nextProps){
-        console.log(nextProps)
+        // console.log(nextProps)
         if(nextProps && nextProps.auth.errors && nextProps.auth.errors.length > 0){
             nextProps.auth.errors.forEach(error => {
                 message.error(error.msg)
@@ -44,7 +48,7 @@ class Register extends Component {
 
         if(nextProps.auth.isAuthenticated){
             message.success("Thankyou for sigining up")
-            setTimeout(()=> this.props.history.push("/"),3000)
+            setTimeout(()=>{ this.props.history("/")},3000) //in v6 and above push isnot needed
         }
     }
 
@@ -54,18 +58,22 @@ class Register extends Component {
     }
 
     OnSubmit(){
+        let role = this.props.location.search.split("?role=")
+        role = role[role.length-1]
+        console.log(role)
         const {name,email,password} = this.state
         const newUser = {
             name,
             email,
-            password
+            password,
+            role
         }
 
         if(password === this.state.password2){
             this.props.register(newUser)
         }
         else{
-            console.log("password doesn't match")
+            message.error("Password must match")
         }
     }
 

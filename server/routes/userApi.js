@@ -21,7 +21,7 @@ async (req,res)=>{
     if(!errors.isEmpty())
         return res.status(400).json({errors: errors.array()})
     try {
-        const {name,email,password} = req.body
+        const {name,email,password,role} = req.body
         let user = await User.findOne({email: email})
         if(user){
             return res
@@ -29,7 +29,10 @@ async (req,res)=>{
             .json({errors:[{msg:"user alreadu exsist"}]})
         }
         user = new User({
-            name, email,password
+            name, 
+            email,
+            password,
+            role
         })
 
         const salt = await bcrypt.genSalt(10)
