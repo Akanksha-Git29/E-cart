@@ -38,7 +38,16 @@ class Login extends Component {
     }
 
     componentWillReceiveProps(nextProps){
-        console.log(nextProps)
+        if(nextProps && nextProps.auth.errors && nextProps.auth.errors.length > 0){
+            nextProps.auth.errors.forEach(error => {
+                message.error(error.msg)
+            })
+        }
+
+        else if(nextProps.isAuthenticated){
+            message.success("Thankyou for Login In")
+            setTimeout(()=>{ this.props.history("/")},3000) //in v6 and above push isnot needed
+        }
     }
 
     onChange(e){
@@ -88,6 +97,7 @@ class Login extends Component {
 }
 
 const mapStateToProps = (state) => ({
+    auth: state.auth,
     isAuthenticated: state.auth.isAuthenticated
 })
 

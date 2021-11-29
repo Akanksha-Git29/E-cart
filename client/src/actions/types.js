@@ -7,6 +7,7 @@ export const FAILURE_REGISTER = "FAILURE_REGISTER"
 export const AUTH_ERROR = "AUTH_ERROR"
 export const SUCCESSFUL_LOGIN= "SUCCESSFUL_LOGIN"
 export const FAILURE_LOGIN = "FAILURE_LOGIN"
+export const LOGOUT = "LOGOUT"
 //strings of type : The key thing is that each of these types 
 // is what you're going to use in tracking a particular 
 // state that is beign retrieve

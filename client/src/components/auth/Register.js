@@ -39,14 +39,14 @@ class Register extends Component {
     }
 
     componentWillReceiveProps(nextProps){
-        // console.log(nextProps)
+        console.log(nextProps)
         if(nextProps && nextProps.auth.errors && nextProps.auth.errors.length > 0){
             nextProps.auth.errors.forEach(error => {
                 message.error(error.msg)
             })
         }
 
-        if(nextProps.auth.isAuthenticated){
+        else if(nextProps.auth.isAuthenticated){
             message.success("Thankyou for sigining up")
             setTimeout(()=>{ this.props.history("/")},3000) //in v6 and above push isnot needed
         }

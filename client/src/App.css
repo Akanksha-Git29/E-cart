@@ -46,13 +46,17 @@ a {
 ul {
     list-style: none;
     display: flex;
+    margin: 0rem;
 }
 
 .nav-h1{
-    margin-left: 3.5rem
+    margin-left: 2.5rem;
+    margin-top: 1rem;
 }
 
 .nav-li{
+    font-size: 1.2rem;
+    margin-top: .8rem;
     margin-right: 2rem;
     display: flex;
     align-items: center;
