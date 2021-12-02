@@ -10,6 +10,7 @@ import NavBAr from './components/general/NavBAr';
 
 //landing componenets
 import Background from './components/landing/Background';
+import Dashboard from './components/dashboard/index'
 
 //user componenets
 import Register from './components/auth/Register';
@@ -29,9 +30,10 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
-        <NavBAr />
+        {/* <NavBAr /> */}
         <Routes>
           <Route exact path="/" element={<Background/>} />
+          <Route exact path="/dashboard" element={<Dashboard/>} />
           <Route exact path="/register" element={<Register/>} />
           <Route exact path="/login" element={<Login/>} />
         </Routes>
