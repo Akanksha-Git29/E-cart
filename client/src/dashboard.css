@@ -4350,9 +4350,9 @@ input[type="button"].btn-block {
 
 .navbar {
    /* position: relative; */
-   top:0;
+   /* top: 0px; */
    display: flex;
-   flex-wrap: wrap;
+   /* flex-wrap: wrap; */
    align-items: center;
    justify-content: space-between;
    padding: 0.5rem 1rem;
@@ -6979,9 +6979,9 @@ button.bg-dark:focus {
    display: table-cell !important;
 }
 
-.d-flex {
+/* .d-flex {
    display: flex !important;
-}
+} */
 
 .d-inline-flex {
    display: inline-flex !important;
@@ -7224,9 +7224,9 @@ button.bg-dark:focus {
    flex-direction: row !important;
 }
 
-.flex-column {
+/* .flex-column {
    flex-direction: column !important;
-}
+} */
 
 .flex-row-reverse {
    flex-direction: row-reverse !important;
@@ -10676,16 +10676,15 @@ a:focus {
    display: flex;
 }
 
-#wrapper #content-wrapper {
+/* #wrapper #content-wrapper {
    background-color: #f8f9fc;
    width: 100%;
    overflow-x: hidden;
-   top:0;
 }
 
 #wrapper #content-wrapper #content {
    flex: 1 0 auto;
-}
+} */
 
 .container,
 .container-fluid {

@@ -57,63 +57,12 @@ class Dashboard extends Component {
     return (
       <div>
         <div className="wrapper">
-          <ul
-            className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
-            id="accordionSidebar"
-          >
-            <Link
-              className="sidebar-brand d-flex align-items-center justify-content-center"
-              to="/"
-            >
-              <div className="sidebar-brand-text mx-3">
-                <i className="fas fa-store"></i> e-Shop
-              </div>
-            </Link>
-
-            <hr className="sidebar-divider my-0" />
-
-            <li className="nav-item active">
-              <Link className="nav-link" to="/dashboard">
-                <i className="fas fa-fw fa-tachometer-alt "></i>
-                <span>Merchant Store</span>
-              </Link>
-            </li>
-
-            <hr className="sidebar-divider" />
-
-            <li className="nav-item">
-              <Link className="nav-link" to="/dashboard/addProduct">
-                <i className="fas fa-fw fa-chart-area"></i>
-                <span>Add A Product</span>
-              </Link>
-            </li>
-
-            <hr className="sidebar-divider " />
-
-            <li className="nav-item">
-              <Link className="nav-link" to="/dashboard/products">
-                <i className="fas fa-fw fa-table"></i>
-                <span>Products</span>
-              </Link>
-            </li>
-
-            <hr className="sidebar-divider" />
-
-            <li className="nav-item">
-              <Link className="nav-link" to="/dashboard/profile">
-                <i className="far fa-id-card"></i>
-                <span>Profile</span>
-              </Link>
-            </li>
-            <hr className="sidebar-divider " />
-          </ul>
-
           <div id="content-wrapper" className="d-flex flex-column">
             <div id="content">
-              <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+              <nav className="navbar navbar-expand navbar-light bg-white topbar mb-44 static-top shadow">
                 <button
                   id="sidebarToggleTop"
-                  className="btn btn-link d-md-none rounded-circle mr-3"
+                  className="btn btn-link rounded-circle mr-3"
                 >
                   <i className="fa fa-bars"></i>
                 </button>
@@ -221,15 +170,65 @@ class Dashboard extends Component {
               </nav>
               {/* <Child {...this.props} search={this.state.search} /> */}
             </div>
-
-            <footer className="sticky-footer bg-white">
-              <div className="container my-auto">
-                <div className="copyright text-center my-auto">
-                  <span>Copyright &copy; eShop {new Date().getFullYear()}</span>
-                </div>
-              </div>
-            </footer>
           </div>
+          <ul
+            className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+            id="accordionSidebar"
+          >
+            <Link
+              className="sidebar-brand d-flex align-items-center justify-content-center"
+              to="/"
+            >
+              <div className="sidebar-brand-text mx-3">
+                <i className="fas fa-store"></i> e-Shop
+              </div>
+            </Link>
+
+            <hr className="sidebar-divider my-0" />
+
+            <li className="nav-item active">
+              <Link className="nav-link" to="/dashboard">
+                <i className="fas fa-fw fa-tachometer-alt "></i>
+                <span>Merchant Store</span>
+              </Link>
+            </li>
+
+            <hr className="sidebar-divider" />
+
+            <li className="nav-item">
+              <Link className="nav-link" to="/dashboard/addProduct">
+                <i className="fas fa-fw fa-chart-area"></i>
+                <span>Add A Product</span>
+              </Link>
+            </li>
+
+            <hr className="sidebar-divider " />
+
+            <li className="nav-item">
+              <Link className="nav-link" to="/dashboard/products">
+                <i className="fas fa-fw fa-table"></i>
+                <span>Products</span>
+              </Link>
+            </li>
+
+            <hr className="sidebar-divider" />
+
+            <li className="nav-item">
+              <Link className="nav-link" to="/dashboard/profile">
+                <i className="far fa-id-card"></i>
+                <span>Profile</span>
+              </Link>
+            </li>
+            <hr className="sidebar-divider " />
+          </ul>
+
+          <footer className="sticky-footer bg-white">
+            <div className="container my-auto">
+              <div className="copyright text-center my-auto">
+                <span>Copyright &copy; eShop {new Date().getFullYear()}</span>
+              </div>
+            </div>
+          </footer>
         </div>
 
         <Link className="scroll-to-top rounded" to="#page-top">
