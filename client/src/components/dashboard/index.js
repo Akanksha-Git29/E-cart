@@ -15,6 +15,10 @@ class Dashboard extends Component {
     };
   }
 
+  componentDidMount() {
+    this.activeNav();
+  }
+
   activeNav() {
     const pathname = window.location.pathname;
     const possibleRoutes = [
@@ -31,9 +35,6 @@ class Dashboard extends Component {
     });
   }
 
-  componentDidMount() {
-    this.activeNav();
-  }
 
   avatarText = (name) => {
     let initial = "";
@@ -168,9 +169,10 @@ class Dashboard extends Component {
                   </li>
                 </ul>
               </nav>
-              {/* <Child {...this.props} search={this.state.search} /> */}
+              <Child {...this.props} search={this.state.search} />
             </div>
           </div>
+
           <ul
             className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
             id="accordionSidebar"

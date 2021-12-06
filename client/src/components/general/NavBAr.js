@@ -9,7 +9,10 @@ const NavBAr = ({auth : {isAuthenticated}, logout}) => {
     const user = (
         <ul>
             <li className='nav-li'>
-                <Link to="/register?role=merchant">Merchants</Link>
+                <Link to="/dashboard">Dashboard</Link>
+            </li>
+            <li className='nav-li'>
+                <Link to="/register?role=merchant">Become A Merchants</Link>
             </li>
             <li className='nav-li'>
                 <Link onClick={logout}  to="#!">

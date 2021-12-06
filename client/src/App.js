@@ -6,11 +6,16 @@ import setAuthToken from './util/setAuthToken';
 import { setCurrentUser } from './actions/authAction';
 
 //importing general componenets
-import NavBAr from './components/general/NavBAr';
+import ProtectedRoute from './components/general/ProtectedRoute'; //wrapper under routes
 
 //landing componenets
 import Landing from './components/landing';
+
+//dashboard componenets
 import Dashboard from './components/dashboard/index'
+import AddProduct from './components/dashboard/components/AddProduct';
+import Home from './components/dashboard/components/Home';
+import Product from './components/dashboard/components/Product';
 
 //user componenets
 import Register from './components/auth/Register';
@@ -22,7 +27,7 @@ if(localStorage.token){
   setAuthToken(localStorage.token)
 }
 
-function App() {
+function App(props) {
   useEffect(() => {
     store.dispatch(setCurrentUser())
   }, [])
@@ -32,13 +37,25 @@ function App() {
       <Router>
         <Routes>
           <Route exact path="/" element={<Landing/>} />
-          <Route exact path="/dashboard" element={<Dashboard/>} />
+          <Route exact path="/" element={<ProtectedRoute/>}>  
+            <Route exact 
+              path="/dashboard" 
+              element={<Dashboard {...props} nestedRoute={Home} />} 
+            />
+            <Route exact 
+              path="/dashboard/addProduct" 
+              element={<Dashboard {...props} nestedRoute={AddProduct} />} 
+            />
+            <Route exact 
+              path="/dashboard/products" 
+              element={<Dashboard {...props} nestedRoute={Product} />} 
+            />
+          </Route>
           <Route exact path="/register" element={<Register/>} />
           <Route exact path="/login" element={<Login/>} />
         </Routes>
       </Router>
     </Provider>
-
 
   );
 }
