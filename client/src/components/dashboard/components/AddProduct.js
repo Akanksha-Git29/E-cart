@@ -1,7 +1,26 @@
 import React, { Component } from 'react'
 import Input from '../../general/Input'
+import { connect } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { addProduct } from '../../../actions/productAction'
+import { message } from 'antd'
 
-export default class AddProduct extends Component {
+export const withRouter = (Component) => { //works only for react16-17 //hooks
+    const Wrapper = (props) => { 
+        const history = useNavigate(); //userNavigator ~ useHistory ~withRoutes
+
+        return (
+            <Component
+                history={history}
+                {...props}
+            />
+        );
+    };
+
+    return Wrapper;
+};
+
+class AddProduct extends Component {
     constructor(props){
         super(props)
         this.state={
@@ -28,7 +47,13 @@ export default class AddProduct extends Component {
             quantity,
             category
         }
-        console.log(newProducts)
+
+        console.log(this.props)
+        if(name.length <= 0 || description.length <= 0 
+            ||price.length <=0 || brand.length <=0 
+            || quantity.length <=0)
+            return message.error("all fields are required")
+        this.props.addProduct(newProducts, this.props.history)
     }
 
     render() {
@@ -97,3 +122,9 @@ export default class AddProduct extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) =>({
+    products: state.products
+})
+
+export default connect(mapStateToProps,{addProduct})(withRouter(AddProduct))

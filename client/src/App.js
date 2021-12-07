@@ -38,15 +38,15 @@ function App(props) {
         <Routes>
           <Route exact path="/" element={<Landing/>} />
           <Route exact path="/" element={<ProtectedRoute/>}>  
-            <Route exact 
+            <Route  
               path="/dashboard" 
               element={<Dashboard {...props} nestedRoute={Home} />} 
             />
-            <Route exact 
+            <Route  
               path="/dashboard/addProduct" 
               element={<Dashboard {...props} nestedRoute={AddProduct} />} 
             />
-            <Route exact 
+            <Route  
               path="/dashboard/products" 
               element={<Dashboard {...props} nestedRoute={Product} />} 
             />
