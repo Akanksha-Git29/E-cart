@@ -1,11 +1,12 @@
 const express = require('express')
 const app = express()
 const cors = require('cors')
+const morgan = require('morgan')
 const connectDB = require('./config/db')
 const PORT = process.env.PORT || 5000 //process.env checks for environmental prot like in gcloud
 
 app.use(cors()) //will give POST http://localhost:5000/api/users net::ERR_CONNECTION_REFUSED err if not run
-
+app.use(morgan("dev"))
 //connecting mongoDB
 connectDB()
 
@@ -14,6 +15,7 @@ app.use(express.json({extends:false}))
 app.use("/api/users",require("./routes/userApi"))
 app.use("/api/products",require("./routes/productsApi"))
 app.use("/api/auth",require("./routes/authApi"))
+app.use("/api/profile",require("./routes/profileApi"))
 
 app.get("/",(req,res)=>{
     res.send("My App Begins")

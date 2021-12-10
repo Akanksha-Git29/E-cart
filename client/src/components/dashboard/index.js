@@ -1,10 +1,30 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
+import { Link, NavLink, Routes , Route} from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Avatar } from "antd";
 import { logout } from '../../actions/authAction'
+
+//dashboard components
 import '../../dashboard.css'
+import Home from './components/Home';
+import AddProduct from './components/AddProduct';
+import Product from './components/Product';
+
+// function ActiveNav({
+//   to,
+//   className,
+//   activeClassName,
+//   inactiveClassName,
+//   ...rest
+// }) {
+//   let location = useLocation()
+//   let isActive = location.pathname === to
+
+//   let allClassNames = className + (isActive ? `${activeClassName}` : `${inactiveClassName}`)
+
+//   return <Link className={allClassNames} to={to} {...rest} />
+// }
 
 class Dashboard extends Component {
   constructor(props) {
@@ -14,27 +34,6 @@ class Dashboard extends Component {
       search: "",
     };
   }
-
-  componentDidMount() {
-    this.activeNav();
-  }
-
-  activeNav() {
-    const pathname = window.location.pathname;
-    const possibleRoutes = [
-      { routes: "/dashboard", targetId: "home" },
-      { routes: "/addProduct", targetId: "addProduct" },
-      { routes: "/products", targetId: "products" },
-      { routes: "/profile", targetId: "profile" },
-    ];
-    possibleRoutes.forEach(({ route, targetId }) => {
-      window.jQuery(`#${targetId}`).removeClass("active");
-      if (route === pathname) {
-        window.jQuery(`#${targetId}`).addClass("active");
-      }
-    });
-  }
-
 
   avatarText = (name) => {
     let initial = "";
@@ -51,8 +50,8 @@ class Dashboard extends Component {
   };
 
   render() {
-    const Child = this.state.child
-    console.log(Child)
+    // const Child = this.state.child
+    // console.log(Child)
     const { user } = this.props.auth;
 
     return (
@@ -169,7 +168,14 @@ class Dashboard extends Component {
                   </li>
                 </ul>
               </nav>
-              <Child {...this.props} search={this.state.search} />
+              {/* <Child {...this.props} search={this.state.search} /> */}
+              <div className='nested-routes'>
+                <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/addProduct" element={<AddProduct />} />
+                <Route path="/products" element={<Product />} />
+                </Routes>
+              </div>
             </div>
           </div>
 
@@ -177,49 +183,49 @@ class Dashboard extends Component {
             className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
             id="accordionSidebar"
           >
-            <Link
+            <NavLink
               className="sidebar-brand d-flex align-items-center justify-content-center"
               to="/"
             >
               <div className="sidebar-brand-text mx-3">
                 <i className="fas fa-store"></i> e-Shop
               </div>
-            </Link>
+            </NavLink>
 
             <hr className="sidebar-divider my-0" />
 
-            <li className="nav-item active">
-              <Link className="nav-link" to="/dashboard">
+            <li className="nav-item">
+              <NavLink  className="nav-link" to="/dashboard">
                 <i className="fas fa-fw fa-tachometer-alt "></i>
                 <span>Merchant Store</span>
-              </Link>
+              </NavLink>
             </li>
 
             <hr className="sidebar-divider" />
 
             <li className="nav-item">
-              <Link className="nav-link" to="/dashboard/addProduct">
+              <NavLink  className="nav-link" to="/dashboard/addProduct">
                 <i className="fas fa-fw fa-chart-area"></i>
                 <span>Add A Product</span>
-              </Link>
+              </NavLink>
             </li>
 
             <hr className="sidebar-divider " />
 
             <li className="nav-item">
-              <Link className="nav-link" to="/dashboard/products">
+              <NavLink className="nav-link" to="/dashboard/products">
                 <i className="fas fa-fw fa-table"></i>
                 <span>Products</span>
-              </Link>
+              </NavLink>
             </li>
 
             <hr className="sidebar-divider" />
 
             <li className="nav-item">
-              <Link className="nav-link" to="/dashboard/profile">
+              <NavLink  className="nav-link" to="/dashboard/profile">
                 <i className="far fa-id-card"></i>
                 <span>Profile</span>
-              </Link>
+              </NavLink>
             </li>
             <hr className="sidebar-divider " />
           </ul>

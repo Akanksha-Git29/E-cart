@@ -48,7 +48,7 @@ class AddProduct extends Component {
             category
         }
 
-        console.log(this.props)
+        console.log(this.props.history)
         if(name.length <= 0 || description.length <= 0 
             ||price.length <=0 || brand.length <=0 
             || quantity.length <=0)

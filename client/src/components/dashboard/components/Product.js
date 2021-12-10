@@ -1,11 +1,67 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { getProducts } from '../../../actions/productAction'
+import { getInstructorProduct } from '../../../actions/productAction'
+import Products from '../../general/Products'
+import { decodeUser } from '../../../util'
 
-export default class Product extends Component {
+class Product extends Component {
+
+    constructor(props){
+        super(props)
+        this.state={
+            merchantProducts: []
+        }
+    }
+
+    componentDidMount(){
+        this.props.getInstructorProduct(decodeUser().user.id)
+        // console.log(decodeUser().user.id)
+    }
+
+    componentWillReceiveProps(nextProps){
+        // console.log(nextProps.products.products)
+        if(
+            nextProps && 
+            nextProps.products && 
+            nextProps.products.products.length > 0
+        ){
+            const userId = decodeUser().user.id
+            const merchantProducts = nextProps.products.products
+
+            this.setState({merchantProducts})
+        }
+        
+    }
+
+    productDetails = (product)=>{
+        return(
+            <ul>
+                <li>INR:{product.price}</li>
+                <li>  Quntity:{product.quantity}</li>
+            </ul>
+        )
+    }
+
     render() {
+        const {merchantProducts} = this.state
         return (
-            <div>
-                Products
+            <div className='row'>
+                {merchantProducts.map((product, index) =>(
+                    <Products 
+                        product={product} 
+                        description={this.productDetails(product)} 
+                        buttonName='ADD Images' 
+                    />
+                ))}
             </div>
         )
     }
 }
+
+const mapStateToProps = (state)=>({
+    products: state.products,
+    auth: state.auth
+})
+
+export default connect(mapStateToProps,{getInstructorProduct})(Product)

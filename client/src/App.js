@@ -13,9 +13,7 @@ import Landing from './components/landing';
 
 //dashboard componenets
 import Dashboard from './components/dashboard/index'
-import AddProduct from './components/dashboard/components/AddProduct';
 import Home from './components/dashboard/components/Home';
-import Product from './components/dashboard/components/Product';
 
 //user componenets
 import Register from './components/auth/Register';
@@ -38,17 +36,9 @@ function App(props) {
         <Routes>
           <Route exact path="/" element={<Landing/>} />
           <Route exact path="/" element={<ProtectedRoute/>}>  
-            <Route  
-              path="/dashboard" 
+            <Route  exact
+              path="/dashboard/*" 
               element={<Dashboard {...props} nestedRoute={Home} />} 
-            />
-            <Route  
-              path="/dashboard/addProduct" 
-              element={<Dashboard {...props} nestedRoute={AddProduct} />} 
-            />
-            <Route  
-              path="/dashboard/products" 
-              element={<Dashboard {...props} nestedRoute={Product} />} 
             />
           </Route>
           <Route exact path="/register" element={<Register/>} />

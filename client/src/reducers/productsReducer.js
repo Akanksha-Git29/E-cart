@@ -14,6 +14,11 @@ export default function(state=initialState, action){
                 ...state,
                 products: payload
             }
+        case GET_PRODUCT:
+            return{
+                ...state,
+                product: payload
+            }
         case PRODUCT_ERROR:
             return{
                 ...state,
