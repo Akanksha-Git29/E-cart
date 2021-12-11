@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, NavLink, Routes , Route} from "react-router-dom";
+import { Link, NavLink, Routes, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Avatar } from "antd";
@@ -10,6 +10,8 @@ import '../../dashboard.css'
 import Home from './components/Home';
 import AddProduct from './components/AddProduct';
 import Product from './components/Product';
+import Profile from './components/Profile';
+import AddProfile from './components/AddProfile';
 
 // function ActiveNav({
 //   to,
@@ -28,7 +30,7 @@ import Product from './components/Product';
 
 class Dashboard extends Component {
   constructor(props) {
-    super(props);   
+    super(props);
     this.state = {
       child: props.nestedRoute,
       search: "",
@@ -169,66 +171,74 @@ class Dashboard extends Component {
                 </ul>
               </nav>
               {/* <Child {...this.props} search={this.state.search} /> */}
-              <div className='nested-routes'>
-                <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/addProduct" element={<AddProduct />} />
-                <Route path="/products" element={<Product />} />
-                </Routes>
-              </div>
+
             </div>
           </div>
 
-          <ul
-            className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
-            id="accordionSidebar"
-          >
-            <NavLink
-              className="sidebar-brand d-flex align-items-center justify-content-center"
-              to="/"
+          <div className='main-content' style={{display:"flex"}}>
+            <ul
+              className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+              id="accordionSidebar"
             >
-              <div className="sidebar-brand-text mx-3">
-                <i className="fas fa-store"></i> e-Shop
-              </div>
-            </NavLink>
-
-            <hr className="sidebar-divider my-0" />
-
-            <li className="nav-item">
-              <NavLink  className="nav-link" to="/dashboard">
-                <i className="fas fa-fw fa-tachometer-alt "></i>
-                <span>Merchant Store</span>
+              <NavLink
+                className="sidebar-brand d-flex align-items-center justify-content-center"
+                to="/"
+              >
+                <div className="sidebar-brand-text mx-3">
+                  <i className="fas fa-store"></i> e-Shop
+                </div>
               </NavLink>
-            </li>
 
-            <hr className="sidebar-divider" />
+              <hr className="sidebar-divider my-0" />
 
-            <li className="nav-item">
-              <NavLink  className="nav-link" to="/dashboard/addProduct">
-                <i className="fas fa-fw fa-chart-area"></i>
-                <span>Add A Product</span>
-              </NavLink>
-            </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/dashboard">
+                  <i className="fas fa-fw fa-tachometer-alt "></i>
+                  <span>Merchant Store</span>
+                </NavLink>
+              </li>
 
-            <hr className="sidebar-divider " />
+              <hr className="sidebar-divider" />
 
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/dashboard/products">
-                <i className="fas fa-fw fa-table"></i>
-                <span>Products</span>
-              </NavLink>
-            </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/dashboard/addProduct">
+                  <i className="fas fa-fw fa-chart-area"></i>
+                  <span>Add A Product</span>
+                </NavLink>
+              </li>
 
-            <hr className="sidebar-divider" />
+              <hr className="sidebar-divider " />
 
-            <li className="nav-item">
-              <NavLink  className="nav-link" to="/dashboard/profile">
-                <i className="far fa-id-card"></i>
-                <span>Profile</span>
-              </NavLink>
-            </li>
-            <hr className="sidebar-divider " />
-          </ul>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/dashboard/products">
+                  <i className="fas fa-fw fa-table"></i>
+                  <span>Products</span>
+                </NavLink>
+              </li>
+
+              <hr className="sidebar-divider" />
+
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/dashboard/profile">
+                  <i className="far fa-id-card"></i>
+                  <span>Profile</span>
+                </NavLink>
+              </li>
+              <hr className="sidebar-divider " />
+            </ul>
+
+            <div className='nested-routes' style={{ margin:"2rem" }}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/addProduct" element={<AddProduct />} />
+                <Route path="/products" element={<Product />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/addprofile" element={<AddProfile />} />
+              </Routes>
+            </div>
+          </div>
+
+
 
           <footer className="sticky-footer bg-white">
             <div className="container my-auto">

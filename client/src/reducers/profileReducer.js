@@ -1,6 +1,6 @@
 import { ERRORS, GET_PROFILE, PROFILE_ERROR } from "../actions/types"
 const initialState = {
-    profile: {},
+    profile: null,
     error: {},
     errors: []
 }

@@ -10,6 +10,7 @@ import ProtectedRoute from './components/general/ProtectedRoute'; //wrapper unde
 
 //landing componenets
 import Landing from './components/landing';
+import ProductDetails from './components/landing/ProductDetails';
 
 //dashboard componenets
 import Dashboard from './components/dashboard/index'
@@ -34,7 +35,8 @@ function App(props) {
     <Provider store={store}>
       <Router>
         <Routes>
-          <Route exact path="/" element={<Landing/>} />
+        <Route exact path="/" element={<Landing/>} />
+        <Route exact path="/products/:id" element={<ProductDetails/>} />
           <Route exact path="/" element={<ProtectedRoute/>}>  
             <Route  exact
               path="/dashboard/*" 

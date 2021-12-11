@@ -26,9 +26,9 @@ class Products extends Component {
 
     productDetails = (product)=>{
         return(
-            <ul>
+            <ul style={{display:"block"}}>
                 <li>INR:{product.price}</li>
-                <li>  Quntity:{product.quantity}</li>
+                <li>Quntity:{product.quantity}</li>
             </ul>
         )
     }
@@ -42,6 +42,7 @@ class Products extends Component {
                     {products.map((product,index)=>(
                         <Product 
                             key={index}
+                            link={`products/${product._id}`}
                             product={product} 
                             description={this.productDetails(product)} 
                             buttonName='Add To Cart'

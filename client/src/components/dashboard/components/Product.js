@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getProducts } from '../../../actions/productAction'
 import { getInstructorProduct } from '../../../actions/productAction'
 import Products from '../../general/Products'
 import { decodeUser } from '../../../util'
