@@ -11,6 +11,7 @@ export const LOGOUT = "LOGOUT"
 export const PRODUCT_ERROR = "PRODUCT_ERROR"
 export const GET_PROFILE = "GET_PROFILE"
 export const PROFILE_ERROR = "PROFILE_ERROR"
+export const GET_CART = "GET_CART"
 //strings of type : The key thing is that each of these types 
 // is what you're going to use in tracking a particular 
 // state that is beign retrieve

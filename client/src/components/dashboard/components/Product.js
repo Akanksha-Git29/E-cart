@@ -15,17 +15,16 @@ class Product extends Component {
 
     componentDidMount(){
         this.props.getInstructorProduct(decodeUser().user.id)
-        // console.log(decodeUser().user.id)
+        console.log(decodeUser().user.id)
     }
 
     componentWillReceiveProps(nextProps){
-        // console.log(nextProps.products.products)
+        console.log(nextProps.products.products)
         if(
             nextProps && 
             nextProps.products && 
             nextProps.products.products.length > 0
         ){
-            const userId = decodeUser().user.id
             const merchantProducts = nextProps.products.products
 
             this.setState({merchantProducts})
@@ -37,7 +36,7 @@ class Product extends Component {
         return(
             <ul>
                 <li>INR:{product.price}</li>
-                <li>  Quntity:{product.quantity}</li>
+                <li>Quntity:{product.quantity}</li>
             </ul>
         )
     }
@@ -48,6 +47,7 @@ class Product extends Component {
             <div className='row'>
                 {merchantProducts.map((product, index) =>(
                     <Products 
+                        key={index}
                         product={product} 
                         description={this.productDetails(product)} 
                         buttonName='ADD Images' 

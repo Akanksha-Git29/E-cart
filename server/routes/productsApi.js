@@ -22,7 +22,7 @@ async (req,res)=>{
     }
 
     try {
-        const {name,description,category,price,brand,quantity} = req.body
+        const {name,description,category,price,brand,quantity,rating,features} = req.body
         const newProduct = new Product({
             userId: req.user.id,
             name,
@@ -30,7 +30,9 @@ async (req,res)=>{
             category,
             price,
             brand,
-            quantity
+            quantity,
+            rating,
+            features
             })
         const product = await newProduct.save()
         res.json({product})

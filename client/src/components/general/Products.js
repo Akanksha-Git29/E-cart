@@ -8,7 +8,7 @@ const { Meta } = Card;
 const Products = ({product, description, buttonName, link}) => {
     return (
         <div style={{display:"flex"}}>
-            <Link to={link}>
+            <Link to={link || ""}>
                 <Card
                     hoverable
                     style={{ width: 300 }}

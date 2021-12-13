@@ -29,7 +29,9 @@ class AddProduct extends Component {
             price:"",
             brand:"",
             quantity:"",
-            category:""
+            category:"",
+            features:"",
+            rating:""
         }
     }
 
@@ -38,17 +40,18 @@ class AddProduct extends Component {
     }
 
     onSubmit=()=>{
-        const {name, description,price, brand,quantity, category} = this.state
+        const {name, description,price, brand,quantity, category, rating, features} = this.state
         const newProducts = {
             name,
             description,
             price,
             brand,
             quantity,
-            category
+            category,
+            features,
+            rating
         }
 
-        console.log(this.props.history)
         if(name.length <= 0 || description.length <= 0 
             ||price.length <=0 || brand.length <=0 
             || quantity.length <=0)
@@ -57,7 +60,7 @@ class AddProduct extends Component {
     }
 
     render() {
-        const {name, description,price, brand,quantity, category} = this.state
+        const {name, description,price, brand,quantity, category, features, rating} = this.state
         return (
             <div style={{textAlign:"center"}} >
                 <h1> Add Products </h1>
@@ -90,6 +93,22 @@ class AddProduct extends Component {
                     placeholder="Enter the brand of this product"
                     name="brand"
                     value={brand}
+                    onChange={this.onChange}
+                    style={{width:"360px",height:"35px"}}
+                />
+                <Input 
+                    type="number" 
+                    placeholder="Enter the rating"
+                    name="rating"
+                    value={rating}
+                    onChange={this.onChange}
+                    style={{width:"360px",height:"35px"}}
+                />
+                <Input 
+                    type="text" 
+                    placeholder="Enter the features of this product"
+                    name="features"
+                    value={features}
                     onChange={this.onChange}
                     style={{width:"360px",height:"35px"}}
                 />

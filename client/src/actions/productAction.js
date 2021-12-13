@@ -41,7 +41,7 @@ export const addProduct = (productData,history) => async(dispatch) =>{
     }
     try {
         await axios.post(`${getServer()}/api/products`,productData,config)
-        .then((res) => history("/dashboard/products"))
+        .then((_) => history("/dashboard/products"))
     } catch (err) {
         dispatch({
             type: PRODUCT_ERROR,
@@ -50,13 +50,15 @@ export const addProduct = (productData,history) => async(dispatch) =>{
     }
 }
 
-export const getInstructorProduct=(id)=>async dispatch=>{
+export const getInstructorProduct=(id)=>async dispatch =>{
     try {
         await axios.get(`${getServer()}/api/products/instructors/${id}`)
-        .then(res => dispatch({
-            type: GET_PRODUCTS,
-            payload: res.data
-        }))
+        .then((res) => 
+            dispatch({
+                type: GET_PRODUCTS,
+                payload: res.data
+            })
+        )
     } catch (err) {
         dispatch({
             type: PRODUCT_ERROR,

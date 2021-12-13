@@ -35,6 +35,12 @@ const ProductSchema = new mongoose.Schema({
     updated:{
         type:Date,
         default:Date.now()
+    },
+    rating:{
+        type:Number,
+    },
+    features:{
+        type:Array
     }
 })
 

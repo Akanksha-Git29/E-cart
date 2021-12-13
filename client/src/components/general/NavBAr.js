@@ -39,7 +39,7 @@ const NavBAr = ({auth : {isAuthenticated}, logout}) => {
     return (
         <nav className='navbar bg-main'>
             <h1 className='nav-h1'>
-                <Link to="">
+                <Link to="/">
                     <i className='fas fa-store'></i> E-Cart
                 </Link>
             </h1>
