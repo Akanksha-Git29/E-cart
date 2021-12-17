@@ -4,6 +4,8 @@ import { Provider } from 'react-redux'
 import store from './store'
 import setAuthToken from './util/setAuthToken';
 import { setCurrentUser } from './actions/authAction';
+import { decodeUser } from './util';
+import {addToCart} from './actions/cartActions'
 
 //importing general componenets
 import ProtectedRoute from './components/general/ProtectedRoute'; //wrapper under routes
@@ -30,6 +32,18 @@ function App(props) {
   useEffect(() => {
     store.dispatch(setCurrentUser())
   }, [])
+
+  const grabProductsFromStorage = () =>{
+    const userId = decodeUser().user.id
+    const cartProducts = JSON.parse(localStorage.getItem("products"))
+    const context = {products: cartProducts, userId}
+    store.dispatch(addToCart(context))
+    localStorage.removeItem("products")
+  }
+
+  if(localStorage.getItem("token") && localStorage.getItem("products")){
+    grabProductsFromStorage()
+  }
 
   return (
     <Provider store={store}>

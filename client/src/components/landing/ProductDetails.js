@@ -1,9 +1,12 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux';
-import { useParams, useLocation, useNavigate } from 'react-router-dom'
+import { useParams, useLocation, useNavigate, Link } from 'react-router-dom'
 import { getProduct } from '../../actions/productAction';
-import { Spin, Space, Button, Rate, Modal } from 'antd';
+import { Spin, Space, Button, Rate, Modal, Alert ,message} from 'antd';
 import NavBar from '../general/NavBAr'
+import {isEmpty} from 'lodash'
+import { decodeUser } from '../../util';
+import { addToCart } from '../../actions/cartActions';
 
 export const withRouter = (Component) => { //works only for react16-17 //hooks
     const Wrapper = (props) => {
@@ -38,7 +41,7 @@ class ProductDetails extends Component {
     componentDidMount() {
         const pid = this.props.id
         this.props.getProduct(pid)
-        console.log(pid)
+        // console.log(pid)
     }
 
     componentWillReceiveProps(nextProps) {
@@ -57,24 +60,76 @@ class ProductDetails extends Component {
 
     handleOk = () => {
         this.setState({
-            visible: true
+            visible: false
         });
     };
 
     handleCancel = () => {
         this.setState({
-            visible: true
+            visible: false
         });
     };
 
     registerModal = (product) => {
         return (
-            <Modal title="Basic Modal" >
-                <p>Some contents...</p>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
+            <Modal
+                visible={this.state.visible}
+                onOk={this.handleOk}
+                onCancel={this.handleCancel}
+                footer={[
+                    <Button key="back" onClick={this.handleCancel}>
+                        Close
+                    </Button>,
+                ]}
+            >
+                <div>
+                    <br/>
+                    <Alert
+                        message={
+                            <center>
+                                <span>
+                                    <strong>Added</strong> {product.name} to Cart
+                                </span>
+                            </center>
+                        }
+                        type='success'
+                    />
+                    <br />
+                    <center>
+                        <Link to="/cart">
+                            <Button key="submit" type='primary' >
+                                Go to Cart
+                            </Button>
+                        </Link>
+                    </center>
+                </div>
             </Modal>
         )
+    }
+
+    async addProductsToCart(product){
+        //check if signed in
+        // if not use localStorage rather than our backend
+        if(!localStorage.getItem("token")){
+            const productExsists = !isEmpty(localStorage.getItem("products"))
+            if(productExsists){
+                const products = JSON.parse(localStorage.getItem("products"))
+                products.push(product._id)
+                this.showModal()
+                return localStorage.setItem("products",JSON.stringify([product._id]))
+            }
+            else{
+                this.showModal()
+                return localStorage.setItem("products",JSON.stringify([product._id]))
+                
+            }
+        }
+
+        const userId = decodeUser().user.id
+        const context = {products:[product._id],userId}
+        await this.props.addToCart(context)
+        // this.setState({product})
+        this.showModal()
     }
 
     render() {
@@ -92,10 +147,10 @@ class ProductDetails extends Component {
                                 </div>
                                 <div className="col-lg-6 col-md-6 col-sm-6">
                                     <h1 style={{ margin: "0" }} >{product.name}</h1>
-                                    <p 
-                                        className="lead" style={{ margin: "0" }}>{product.description} 
+                                    <p
+                                        className="lead" style={{ margin: "0" }}>{product.description}
                                     </p>
-                                    <p 
+                                    <p
                                         className='lead' style={{ margin: "0" }}>Features:
                                     </p>
                                     <ul style={{ marginLeft: "5%", marginTop: "0" }} >
@@ -105,11 +160,14 @@ class ProductDetails extends Component {
                                     </ul>
                                     <Rate disabled allowHalf defaultValue={product.rating} style={{ margin: "0" }} />
                                     <p className="lead" style={{ margin: "0" }}>
-                                        Quantity: {product.quantity} 
+                                        Quantity: {product.quantity}
                                     </p>
                                     <h2>INR: {product.price} </h2>
-                                    <Button type='primary' style={{ marginBottom: "3rem" }} onClick={this.showModal} >
-                                        {" "} Add To Cart
+                                    <Button 
+                                        type='primary' style={{ marginBottom: "3rem" }} 
+                                        onClick={(_)=> this.addProductsToCart(product)} > 
+                                        {" "} 
+                                        Add To Cart
                                     </Button>
                                 </div>
                                 <br />
@@ -145,4 +203,4 @@ const mapStateToProps = (state) => ({
     product: state.products.product,
 });
 
-export default connect(mapStateToProps, { getProduct })(withRouter(ProductDetails))
+export default connect(mapStateToProps, { getProduct, addToCart })(withRouter(ProductDetails))
