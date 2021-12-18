@@ -10,6 +10,9 @@ import {addToCart} from './actions/cartActions'
 //importing general componenets
 import ProtectedRoute from './components/general/ProtectedRoute'; //wrapper under routes
 
+//customers component
+import Cart from './components/customers/Cart';
+
 //landing componenets
 import Landing from './components/landing';
 import ProductDetails from './components/landing/ProductDetails';
@@ -56,6 +59,7 @@ function App(props) {
               path="/dashboard/*" 
               element={<Dashboard {...props} nestedRoute={Home} />} 
             />
+            <Route exact path="/cart" element={<Cart />} />
           </Route>
           <Route exact path="/register" element={<Register/>} />
           <Route exact path="/login" element={<Login/>} />

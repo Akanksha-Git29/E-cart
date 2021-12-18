@@ -15,6 +15,9 @@ const NavBAr = ({auth : {isAuthenticated}, logout}) => {
                 <Link to="/register?role=merchant">Become A Merchants</Link>
             </li>
             <li className='nav-li'>
+                <Link to="/cart"><i className="fas fa-cart-arrow-down"></i>My Cert</Link>
+            </li>
+            <li className='nav-li'>
                 <Link onClick={logout}  to="#!">
                     <i className="fas fa-sign-out-alt"></i>
                     <span className='hide-on-mobile'>Logout</span> 

@@ -96,7 +96,7 @@ class ProductDetails extends Component {
                     />
                     <br />
                     <center>
-                        <Link to="/cart">
+                        <Link to="/cart?redirect=/cart">
                             <Button key="submit" type='primary' >
                                 Go to Cart
                             </Button>

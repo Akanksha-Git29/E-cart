@@ -4,6 +4,8 @@ import Input from '../general/Input'
 import { message } from 'antd'
 import { register } from '../../actions/authAction'
 import { useNavigate, useLocation ,} from 'react-router-dom'
+import { decodeUser } from '../../util'
+import {addToCart} from '../../actions/cartActions'
 
 export const withRouter = (Component) => { //works only for react16-17 //hooks
     const Wrapper = (props) => { 
@@ -39,6 +41,12 @@ class Register extends Component {
     }
 
     componentWillReceiveProps(nextProps){
+        const search = this.props.location.search
+        let split = search.split("redirect=")
+        split = split[split.length-1]
+        const hasRedirect = search.includes("redirect")
+        console.log(split)
+
         console.log(nextProps)
         if(nextProps && nextProps.auth.errors && nextProps.auth.errors.length > 0){
             nextProps.auth.errors.forEach(error => {
@@ -47,8 +55,21 @@ class Register extends Component {
         }
 
         else if(nextProps.auth.isAuthenticated){
-            message.success("Thankyou for sigining up")
-            setTimeout(()=>{ this.props.history("/")},3000) //in v6 and above push isnot needed
+            if(split && hasRedirect){
+                if(split === '/cart' && localStorage.getItem("token") && localStorage.getItem("products")){
+                    const userId = decodeUser().user.id
+                    const cartProdcuts = JSON.parse(localStorage.getItem("products"))
+                    const context = {products: cartProdcuts, userId}
+                    this.props.addToCart(context)
+                    localStorage.removeItem("products")
+                }
+                this.props.history(split)
+            }
+            else{
+                message.success("Thankyou for sigining up")
+                setTimeout(()=>{ this.props.history("/")},3000) //in v6 and above push isnot needed
+            }
+            
         }
     }
 
@@ -58,9 +79,9 @@ class Register extends Component {
     }
 
     OnSubmit(){
-        let role = this.props.location.search.split("?role=")
-        role = role[role.length-1]
-        console.log(role)
+        let splitrole = this.props.location.search.split("?role=")
+        splitrole = splitrole[role.length-1].split("&")
+        const role = splitrole[0]
         const {name,email,password} = this.state
         const newUser = {
             name,
@@ -131,4 +152,4 @@ const mapStateToProps = (state) => ({
     auth: state.auth
 })
 
-export default connect(mapStateToProps, { register })(withRouter(Register))
+export default connect(mapStateToProps, { register, addToCart })(withRouter(Register))
