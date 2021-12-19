@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")
+const authorization = require("../middleware/authorization")
 const Schema = mongoose.Schema
 
 const PaymentSchema = new Schema({
@@ -9,7 +10,17 @@ const PaymentSchema = new Schema({
     cartId:{
         type: Schema.Types.ObjectId,
         required: true
-    }
+    },
+    transaction:{
+        type: String,
+        required: true
+    },
+    reference:{
+        type: String,
+        required: true
+    },
+    authorization: JSON,
+    shippingAddress: JSON
 },
 {timestamps: true}
 )

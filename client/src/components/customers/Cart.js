@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { getCart , removeFromCart} from '../../actions/cartActions'
 import { Link } from 'react-router-dom'
 import NavBAr  from '../general/NavBAr'
-
+import Payment from './Payment'
 
 class Cart extends Component {
 
@@ -112,7 +112,7 @@ class Cart extends Component {
                                     <br />
                                     <br />
                                     <h4>{`Total: $ ${this.calculateTotal()}`}</h4>
-                                    {/* <Payment cart={cart} total={this.calculateTotal()} /> */}
+                                    <Payment cart={cart} total={this.calculateTotal()} />
                                 </div>
                                 <div style={{ textAlign: "center" }}>
                                     {cart.products && (
