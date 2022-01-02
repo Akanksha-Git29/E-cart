@@ -6,4 +6,4 @@ before_install:
   - docker build -t ecart/server -f Dockerfile.dev
 
 script:
-  
+  - docker run ecart/server npm test -- --coverage
